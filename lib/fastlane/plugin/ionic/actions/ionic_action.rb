@@ -79,7 +79,7 @@ module Fastlane
 
       # actual building! (run #2)
       def self.build(params)
-        args = [params[:release] ? '-- --release' : '--debug']
+        args = [params[:release] ? '--release' : '--debug']
         args << '--device' if params[:device]
         args << '--prod' if params[:prod]
         args << '--browserify' if params[:browserify]
@@ -88,7 +88,7 @@ module Fastlane
 
         if params[:cordova_prepare]
           # TODO: Remove params not allowed/used for `prepare`
-          sh "ionic cordova prepare #{params[:platform]} #{args.join(' ')}"
+          sh "ionic cordova prepare #{params[:platform]} -- #{args.join(' ')}"
         end
 
         # special handling for `build_number` param
